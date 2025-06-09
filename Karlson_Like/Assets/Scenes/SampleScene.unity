@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,6 +594,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 1303840195}
+  camHolder: {fileID: 1962442538}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1046,7 @@ GameObject:
   - component: {fileID: 1800530573}
   - component: {fileID: 1800530572}
   - component: {fileID: 1800530571}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1134,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -27.4, y: 0.8, z: -18.77}
-  m_LocalScale: {x: 0.28, y: 5, z: 30.48}
+  m_LocalScale: {x: 0.28, y: 57.3, z: 30.48}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1195,6 +1196,9 @@ GameObject:
   - component: {fileID: 1969381177}
   - component: {fileID: 1969381176}
   - component: {fileID: 1969381178}
+  - component: {fileID: 1969381179}
+  - component: {fileID: 1969381180}
+  - component: {fileID: 1969381181}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1261,6 +1265,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 15
   sprintSpeed: 30
+  slideSpeed: 20
+  wallRunSpeed: 20
+  dashSpeed: 20
+  dashSpeedChangeFactor: 50
+  speedIncreaseMultiplier: 1.5
+  slopeIncreaseMultiplier: 2.5
+  maxYSpeed: 0
   groundDrag: 5
   jumpForce: 30
   jumpCooldown: 0.25
@@ -1269,7 +1280,7 @@ MonoBehaviour:
   crouchYScale: 0.5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
+  crouchKey: 99
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -1277,6 +1288,86 @@ MonoBehaviour:
   maxSlopeAngle: 40
   orientation: {fileID: 1303840195}
   state: 0
+  sliding: 0
+  wallrunning: 0
+  dashing: 0
+--- !u!114 &1969381179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969381175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9c40e24f27b5a46aff7c9dc93413b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1303840195}
+  playerObj: {fileID: 327418250}
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideYScale: 0.5
+  slideKey: 306
+--- !u!114 &1969381180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969381175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c8a690166523e43a940b95588ffbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  wallRunForce: 200
+  wallJumpUpForce: 7
+  wallJumpSideForce: 12
+  wallClimbSpeed: 8
+  maxWallRunTime: 1.5
+  jumpKey: 32
+  upwardsRunKey: 304
+  downwardsRunKey: 306
+  wallCheckDistance: 0.7
+  minJumpHeight: 2
+  exitWallTime: 0.2
+  useGravity: 0
+  gravityCounterForce: 0
+  orientation: {fileID: 1303840195}
+  cam: {fileID: 330585548}
+--- !u!114 &1969381181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969381175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 828c4aff85de14249af6503a27f1a02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1303840195}
+  playerCam: {fileID: 330585546}
+  dashForce: 20
+  dashUpwardForce: 0
+  maxDashYSpeed: 15
+  dashDuration: 0.25
+  cam: {fileID: 330585548}
+  dashFov: 95
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 1
+  resetVel: 1
+  dashCd: 1.5
+  dashKey: 101
 --- !u!1 &2141728536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1380,7 @@ GameObject:
   - component: {fileID: 2141728539}
   - component: {fileID: 2141728538}
   - component: {fileID: 2141728537}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1377,7 +1468,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.1, y: 0.8, z: -19.6}
-  m_LocalScale: {x: 0.28, y: 5, z: 30.48}
+  m_LocalScale: {x: 0.28, y: 57.3, z: 30.48}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
